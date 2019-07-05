@@ -19,26 +19,28 @@ export const goToAuth = () => Navigation.setRoot({
 });
 
 export const goHome = () => Navigation.setRoot({
-  root: {
-    sideMenu: {
-      id: "sideMenu",
-      left: {
-        component: {
-          name: "Drawer"
-        }
-      },
-      center: {
-        stack: {
-          id: "App",
-          children: [{
-            component: {
-              name: "Home"
-            }
-          }]
+    root: {
+      sideMenu: {
+        id: "sideMenu",
+        left: {
+          component: {
+            name: "Drawer"
+          }
+        },
+        center: {
+          stack: {
+            id: "App",
+            children: [{
+              component: {
+                name: "Home"
+              }
+            }]
+          }
         }
       }
     }
-  }
-})
+});
+
+
 
 
