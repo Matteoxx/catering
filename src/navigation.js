@@ -3,29 +3,44 @@ import { Navigation } from 'react-native-navigation'
 export const goToAuth = () => Navigation.setRoot({
   root: {
     stack: {
-      id: 'Auth',
-      children: [
-        {
-          component: {
-            name: 'SignIn',
-          }
+      id: "Auth",
+      children: [{
+        component: {
+        name: "SignIn"
         }
-      ],
+      }],
+      options: {
+        topBar: {
+          visible: false
+        }
+      }
     }
   }
 });
 
 export const goHome = () => Navigation.setRoot({
-  root: {
-    stack: {
-      id: 'App',
-      children: [
-        {
+    root: {
+      sideMenu: {
+        id: "sideMenu",
+        left: {
           component: {
-            name: 'Home',
+            name: "Drawer"
+          }
+        },
+        center: {
+          stack: {
+            id: "App",
+            children: [{
+              component: {
+                name: "Home"
+              }
+            }]
           }
         }
-    ],
+      }
     }
-  }
-})
+});
+
+
+
+
