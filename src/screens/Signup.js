@@ -6,22 +6,35 @@ import {
   TextInput,
   StyleSheet
 } from 'react-native';
+import * as firebase from "firebase";
+
 
 export default class SignUp extends React.Component {
   state = {
+    
     username: '', password: '', email: '', phone_number: ''
   }
   onChangeText = (key, val) => {
     this.setState({ [key]: val })
   }
+
   signUp = async () => {
-    const { username, password, email, phone_number } = this.state
-    try {
-      // here place your signup logic
-      console.log('user successfully signed up!: ', success)
-    } catch (err) {
-      console.log('error signing up: ', err)
-    }
+
+   
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+          .then()
+          .catch((error) => {
+            let errorCode = error.code
+            let errorMessage = error.message;
+            if (errorCode == 'auth/weak-password') {
+              // this.onLoginFailure.bind(this)('Weak password!')
+              console.log("err");
+            } else {
+              // this.onLoginFailure.bind(this)(errorMessage)
+              console.log("err");
+            }
+          });
+    
   }
  
   render() {
@@ -30,9 +43,9 @@ export default class SignUp extends React.Component {
         <Text>Rejestracja</Text>
         <TextInput
           style={styles.input}
-          placeholder='Username'
+          placeholder='Email'
           autoCapitalize="none"
-          onChangeText={val => this.onChangeText('username', val)}
+          onChangeText={val => this.onChangeText('email', val)}
         />
         <TextInput
           style={styles.input}
@@ -41,18 +54,7 @@ export default class SignUp extends React.Component {
           autoCapitalize="none"
           onChangeText={val => this.onChangeText('password', val)}
         />
-        <TextInput
-          style={styles.input}
-          placeholder='Email'
-          autoCapitalize="none"
-          onChangeText={val => this.onChangeText('email', val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Phone Number'
-          autoCapitalize="none"
-          onChangeText={val => this.onChangeText('phone_number', val)}
-        />
+  
         <Button
           title='Załóż konto'
           onPress={this.signUp}
